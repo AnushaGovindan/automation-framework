@@ -1,5 +1,6 @@
 package com.swframework.tests;
 
+import org.testng.annotations.Test;
 import java.util.Map;
 import java.util.Map.Entry;
 

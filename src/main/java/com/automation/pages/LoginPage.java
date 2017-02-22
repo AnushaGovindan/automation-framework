@@ -1,42 +1,52 @@
 package com.automation.pages;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+
+import com.automation.actions.DriverBuilder;
 
 public class LoginPage {	
 	
+	@FindBy(css = "span.private-deals-label:nth-child(3) > b:nth-child(1)")
+	@CacheLookup
+	WebElement homepageSignInLink;
 	
-	private WebDriver driver;
-	
-	@FindBy(id = "username")
-	WebElement userNameField;
+	@FindBy(css = "input[id$='username']")
+	@CacheLookup
+	WebElement signInUsername;
  
-	@FindBy(xpath = "//select[@id='pswd']")
-	WebElement pswdField;
+	@FindBy(css = "input[id$='password']")
+	@CacheLookup
+	WebElement signInPassword;
  
-	@FindBy(id = "submitbutton")
-	WebElement submitBtn;
+	@FindBy(css = "button.submit")
+	@CacheLookup
+	WebElement signInLoginButton;
 	
-	/*@findBy(id="userName")
-	 * WebElement userName;
-	 */
+	@FindBy(css = "div[id$='dialog-body']")
+	@CacheLookup
+	WebElement signInModalDialogBox;
+ 
+	@FindBy(css = "a[id$='dialog-close'] > svg:nth-child(1) > path:nth-child(2)")
+	@CacheLookup
+	WebElement signInCloseModalDialogBox;
 	
-	public LoginPage (WebDriver driver){
-        this.driver = driver;
-    }
 
-    public LoginPage loginAsUser(String user, String pw){
-    	userNameField.sendKeys(user);
-    	pswdField.sendKeys(pw);
-    	submitBtn.click();
-        return PageFactory.initElements(driver, LoginPage.class);
+    public void loginAsUser(String user, String pswd) throws Exception {    	
+    	signInModalDialogBox.click();
+    	Thread.sleep(5000);
+    	new Actions(DriverBuilder.Instance).moveToElement(signInUsername).click();
+    	signInUsername.sendKeys(user);
+    	signInPassword.sendKeys(pswd);
+    	signInLoginButton.click();	    	
     }
-	
-	// Get the User name from Home Page
-	public String getHomePageDashboardUserName() {
-		return userNameField.getText();
-	}
+    
+    public void moveToModalDialogBox() throws Exception {
+    	new Actions(DriverBuilder.Instance).moveToElement(signInModalDialogBox).sendKeys(Keys.ENTER);
+    	signInCloseModalDialogBox.click();
+    }
 
 }

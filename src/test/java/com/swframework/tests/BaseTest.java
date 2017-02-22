@@ -11,17 +11,16 @@ import org.testng.annotations.AfterSuite;
 
 public class BaseTest {
 
-	private static Logger log = Logger.getLogger(DriverTest.class);
+	private static Logger log = Logger.getLogger(ProfileSignOutTest.class);
 	WebElementActions drActions = new WebElementActions();	
 
 	@BeforeSuite
 	public void beforeSuite() {
 		 MapObjectRepository.loadPropMap();
-		// DriverBuilder.initDriver("Chrome");
-		DriverBuilder.initDriver("Firefox");
-
-		String gotURl = drActions.getUrl("http://www.kayak.com");
-		log.info("BaseTest: Opened  appln :::::::  " + gotURl);
+		 String browserName = "Firefox"; //Chrome
+		 
+		DriverBuilder.initDriver(browserName);
+		log.info("Initialized Driver ");
 	}
 
 	@AfterSuite

@@ -1,42 +1,48 @@
 package com.automation.pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class SearchPage {	
 	
-	private WebDriver driver;
-	
-	@FindBy(xpath = "//input[@id='Kkmk-location']")
-	WebElement fromLocation;
+	@FindBy(css = "span[id*='traveler-leisure']")
+	WebElement travelerLeisureRadioBtn;
  
-	@FindBy(xpath = "//select[@id='pswd']")
-	WebElement datePicker;
+	@FindBy(css = "span.input.checked")
+	WebElement bookingCompareCheckBox;
  
-	@FindBy(id = "guests")
-	WebElement chooseGuest;
+	@FindBy(css = "input[id$='location']")
+	WebElement whereLocationTxtBox;
 	
-	@FindBy(id="searchBtn")
-	WebElement searchButton;
+	@FindBy(css="input[id*='checkIn']")
+	WebElement checkInTxtBox;
 	 
-	@FindBy(id="travelingFor")
-	WebElement travelingFor;
+	@FindBy(css="div[id*='201703'] > div > div.weeks > div:nth-child(2) > div:nth-child(5) > div")
+	WebElement checkInDatePicker;
 	
-	@FindBy(id="compareSites")
-	WebElement compareSites;
+	@FindBy(css="input[id*='checkOut']")
+	WebElement checkOutTxtBox;
 	
-	public SearchPage (WebDriver driver){
-        this.driver = driver;
-    }
+	@FindBy(css="div[id*='201703'] > div > div.weeks > div:nth-child(4) > div:nth-child(6) > div")
+	WebElement checkOutDatePicker;
+	
+	@FindBy(css="button[id*='submit']")
+	WebElement searchButton;
+	
 
-    public SearchPage loginAsUser(String user, String dates, String guests){
-    	/*fromLocation.sendKeys(user);
-    	datePicker.sendKeys(dates);
-    	chooseGuest.sendKeys(guests);
-    	searchButton.click();*/
-        return PageFactory.initElements(driver, SearchPage.class);
+    public void searchForHotels(String whereLocation){
+    	
+    	travelerLeisureRadioBtn.click();
+    	whereLocationTxtBox.click();
+    	whereLocationTxtBox.sendKeys(whereLocation);				
+		
+    	checkInTxtBox.click();
+    	checkInDatePicker.click();
+    	checkOutTxtBox.click();
+    	checkOutDatePicker.click();    	
+		
+	    searchButton.click();	
+		
     }
 	
 

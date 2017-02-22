@@ -1,6 +1,8 @@
 package com.swframework.tests;
 
 import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -9,20 +11,26 @@ import org.testng.Assert;
 import com.automation.actions.DriverBuilder;
 
 
-public class CopyOfDriverTest extends BaseTest {
+public class OldModelDriverTest extends BaseTest {
 	// http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=08c1691d32c1dba2f5bfa6c3a2f2c79f
 	// http://functionaltestautomation.blogspot.com/2009/10/dataprovider-data-driven-testing-with.html
 
-	private static Logger log = Logger.getLogger(CopyOfDriverTest.class);
+	private static Logger log = Logger.getLogger(OldModelDriverTest.class);
 	//WebElementActions webElemActions = new WebElementActions();
 
 	@Test(priority = 1)
 	public void doVerifyPageTitle() {
+		
+
+		String gotURl = drActions.getUrl("http://www.kayak.com");
+		log.info("BaseTest: Opened  appln :::::::  " + gotURl);
+		
 		log.info("****** verify if url opened  ******");
 		String pageTitle = DriverBuilder.Instance.getTitle();
 		log.info("Page Title -->>>>>>>>>>>   " + pageTitle);
+		
 
-		Assert.assertEquals(pageTitle.toLowerCase().contains("kayak"), true);
+		AssertJUnit.assertEquals(pageTitle.toLowerCase().contains("kayak"), true);
 	}
 
 	@Test(priority = 2)
@@ -49,7 +57,7 @@ public class CopyOfDriverTest extends BaseTest {
 
 			String strLoggedInUser = DriverBuilder.Instance.findElement(By.cssSelector("div.subtitle:nth-child(1)")).getText();
 			log.info("user logged in is >>>>>   " + strLoggedInUser);
-			Assert.assertEquals(strLoggedInUser.toLowerCase().contains(""), true);
+			AssertJUnit.assertEquals(strLoggedInUser.toLowerCase().contains(""), true);
 
 		} catch (Exception e) {
 			log.error("Exception occurred during sign in ::  " + e.getMessage());
@@ -84,7 +92,7 @@ public class CopyOfDriverTest extends BaseTest {
 			Thread.sleep(2000);
 			String getDisplayLocation = DriverBuilder.Instance.findElement(By.cssSelector("div[id*='display-location']")).getText();
 			log.info("Searched for location :::   " + getDisplayLocation);
-			Assert.assertEquals(getDisplayLocation.toLowerCase().contains(""), true);
+			AssertJUnit.assertEquals(getDisplayLocation.toLowerCase().contains(""), true);
 			Thread.sleep(3000);
 
 		} catch (Exception e) {
@@ -101,11 +109,11 @@ public class CopyOfDriverTest extends BaseTest {
 			// Account']")).click();
 			DriverBuilder.Instance.findElement(By.xpath("//span[.='Sign out']")).click();
 
-			Assert.assertEquals(true, true);
+			AssertJUnit.assertEquals(true, true);
 
 		} catch (Exception e) {
 			log.error("Exception occurred while signing out :::  " + e.getMessage());
-			Assert.assertEquals(false, true);
+			AssertJUnit.assertEquals(false, true);
 		}
 	}
 
