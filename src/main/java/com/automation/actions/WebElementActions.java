@@ -32,7 +32,7 @@ public class WebElementActions {
 	public void highLightElement(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) DriverBuilder.Instance;
 		
-		// js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+		//js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
 		js.executeScript("arguments[0].setAttribute('style', arguments[1]);", element, "background: yellow; border: 2px solid red;");
 		log.info("highlighting element with red border");
 		/*
