@@ -13,7 +13,7 @@ public class WindowHandlers {
 
 	public static Logger log = Logger.getLogger(WindowHandlers.class);
 
-	//Move to new window
+	//   Move to new window
 	public String switchwindow(String object, String data) throws NoSuchWindowException{
 
 		try {
