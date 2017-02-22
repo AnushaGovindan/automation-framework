@@ -36,7 +36,7 @@ public class LoginPage {
 	
 
     public void loginAsUser(String user, String pswd) throws Exception {    	
-    	signInModalDialogBox.click();
+    	homepageSignInLink.click();
     	Thread.sleep(5000);
     	new Actions(DriverBuilder.Instance).moveToElement(signInUsername).click();
     	signInUsername.sendKeys(user);

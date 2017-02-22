@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.automation.actions.DriverBuilder;
 import com.automation.pages.SearchPage;
 import com.automation.pages.SearchResultsPage;
+import com.swframework.util.TestDataProviderUtil;
 
 
 public class SearchPageAndResultTest extends BaseTest {
@@ -19,16 +20,19 @@ public class SearchPageAndResultTest extends BaseTest {
 		try {
 			SearchPage searchPage = PageFactory.initElements(DriverBuilder.Instance, SearchPage.class);
 			
-			String strLocation = "";
+			String strLocation = TestDataProviderUtil.dataProp.getProperty("WhereLocation");
+			String validateLocationStr = TestDataProviderUtil.dataProp.getProperty("ValidateLocation");
 			searchPage.searchForHotels(strLocation);
 			
 			Thread.sleep(3000);
 			SearchResultsPage searchResultsPage = PageFactory.initElements(DriverBuilder.Instance, SearchResultsPage.class);
 			String getDisplayLocation = searchResultsPage.getDisplayedLocation();
 			log.info("Searched for location :::   " + getDisplayLocation);
-			
-			AssertJUnit.assertEquals(getDisplayLocation.toLowerCase().contains(strLocation), true);
-			Thread.sleep(3000);
+			log.info("Validation location :::   " + validateLocationStr);
+			Thread.sleep(2000);
+			drActions.captureScreenshot("SearchResults_Page");
+			AssertJUnit.assertEquals(getDisplayLocation.toLowerCase().contains(validateLocationStr), true);
+			Thread.sleep(2000);
 
 		} catch (Exception e) {
 			log.error("Exception occurred while searching :::  " + e.getMessage());
