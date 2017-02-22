@@ -1,16 +1,11 @@
 package com.swframework.tests;
 
 import org.testng.annotations.Test;
-
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import com.automation.actions.DriverBuilder;
-import com.automation.config.MapObjectRepository;
-import com.swframework.config.WebConstants;
 
 
 public class DriverTest extends BaseTest {
@@ -32,26 +27,29 @@ public class DriverTest extends BaseTest {
 	public void clickSignUp() {
 		log.info("*****  Click on SignUp *****");
 		try {
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "span.private-deals-label:nth-child(3) > b:nth-child(1)");
+			drActions.clickElementByLocator("homepage.signin.link");
 
 			Thread.sleep(5000);
 			// DriverBuilder.Instance.switchTo().activeElement().click();
 			// DriverBuilder.Instance.switchTo().frame(1);
 			
-		//	new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']")).click();
-			//drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']");
-			drActions.sendKeysByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']", "");
-			drActions.sendKeysByLocator(WebConstants.CSS_LOCATOR, "input[id$='password']", "");
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "button.submit");
+			new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator("signin.page.username.txtbox")).click();
+			//drActions.sendKeysByLocator("signin.page.username.txtbox", "");
+			drActions.sendKeysByLocator("signin.page.username.txtbox", "");
+			drActions.sendKeysByLocator("signin.page.password.txtbox", "");
+			drActions.clickElementByLocator("signin.page.login.button");
 
 			Thread.sleep(5000);			
-		//	new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator(WebConstants.CSS_LOCATOR, "div[id$='dialog-body']")).sendKeys(Keys.ENTER);
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "a[id$='dialog-close'] > svg:nth-child(1) > path:nth-child(2)");
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, ".profile-icon");
+			new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator("after.signin.modal.dialogbox")).sendKeys(Keys.ENTER);
+			drActions.clickElementByLocator("close.icon.modal.dialogbox");
+			drActions.clickElementByLocator("myaccount.profile.icon");
+			
+			drActions.captureScreenshot("MyAccount_Details");
+			Thread.sleep(2000);
 
-			String strLoggedInUser = drActions.getTextByLocator(WebConstants.CSS_LOCATOR, "div.subtitle:nth-child(1)");
+			String strLoggedInUser = drActions.getTextByLocator("myaccount.preferences.loggedin.user");
 			log.info("user logged in is >>>>>   " + strLoggedInUser);
-			// Assert.assertEquals(strLoggedInUser.toLowerCase().contains(""), true);
+			Assert.assertEquals(strLoggedInUser.toLowerCase().contains(""), true);
 
 		} catch (Exception e) {
 			log.error("Exception occurred during sign in ::  " + e.getMessage());
@@ -62,26 +60,26 @@ public class DriverTest extends BaseTest {
 	public void searchDestination() {
 		log.info("Search for the given destination ");
 		try {
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "span[id*='traveler-leisure']");
+			drActions.clickElementByLocator("searchpage.traveler.leisure.radiobutton");
 			/*Thread.sleep(3000);
 			WebElement bookingCB = DriverBuilder.Instance.findElement(By.cssSelector("span.input.checked"));
 		    //booking checkbox is selected by default
 		    if(bookingCB.isSelected()){
 		    	bookingCB.click();
 		    }*/
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='location']");
-			drActions.sendKeysByLocator(WebConstants.CSS_LOCATOR, "input[id$='location']", "");
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='location']");			
+			drActions.clickElementByLocator("searchpage.where.location.txtbox");
+			drActions.sendKeysByLocator("searchpage.where.location.txtbox", "");
+			//drActions.clickElementByLocator("searchpage.where.location.txtbox");			
 			
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "input[id*='checkIn']");
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "div[id*='201703'] > div > div.weeks > div:nth-child(2) > div:nth-child(5) > div"); // sendKeys("03/12/2017");
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "input[id*='checkOut']");
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "div[id*='201703'] > div > div.weeks > div:nth-child(4) > div:nth-child(6) > div");
+			drActions.clickElementByLocator("searchpage.traveldates.checkin.txtbox");
+			drActions.clickElementByLocator("searchpage.traveldates.checkin.datepicker"); // sendKeys("03/12/2017");
+			drActions.clickElementByLocator("searchpage.traveldates.checkout.txtbox");
+			drActions.clickElementByLocator("searchpage.traveldates.checkout.datepicker");
 			
 		    Thread.sleep(2000);	
-		    drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "button[id*='submit']");
+		    drActions.clickElementByLocator("searchpage.search.button");
 			Thread.sleep(2000);
-			String getDisplayLocation = drActions.getTextByLocator(WebConstants.CSS_LOCATOR, "div[id*='display-location']");
+			String getDisplayLocation = drActions.getTextByLocator("searchresultspage.displayed.where.location");
 			log.info("Searched for location :::   " + getDisplayLocation);
 			Assert.assertEquals(getDisplayLocation.toLowerCase().contains(""), true);
 			Thread.sleep(3000);
@@ -96,8 +94,8 @@ public class DriverTest extends BaseTest {
 		try {
 			log.info("sign out from application ");
 			
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, ".profile-icon");
-			drActions.clickElementByLocator(WebConstants.XPATH_LOCATOR, "//span[.='Sign out']");
+			drActions.clickElementByLocator("myaccount.profile.icon");
+			drActions.clickElementByLocator("myaccount.profile.signout.button");
 			Assert.assertEquals(true, true);
 			
 		} catch (Exception e) {
