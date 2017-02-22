@@ -36,10 +36,11 @@ public class CopyOfDriverTest extends BaseTest {
 			// DriverBuilder.Instance.switchTo().activeElement().click();
 			// DriverBuilder.Instance.switchTo().frame(1);
 			
-			new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']")).click();
+			//This is reqd
+		//	new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']")).click();
 			// DriverBuilder.Instance.findElement(By.cssSelector("input[id$='username']")).click();
-			DriverBuilder.Instance.findElement(By.cssSelector("input[id$='username']")).sendKeys("anusha.govindan1@gmail.com");
-			DriverBuilder.Instance.findElement(By.cssSelector("input[id$='password']")).sendKeys("Sametime@1");
+			DriverBuilder.Instance.findElement(By.cssSelector("input[id$='username']")).sendKeys("");
+			DriverBuilder.Instance.findElement(By.cssSelector("input[id$='password']")).sendKeys("");
 			DriverBuilder.Instance.findElement(By.cssSelector("button.submit")).click();
 
 			Thread.sleep(5000);
@@ -49,7 +50,7 @@ public class CopyOfDriverTest extends BaseTest {
 
 			String strLoggedInUser = DriverBuilder.Instance.findElement(By.cssSelector("div.subtitle:nth-child(1)")).getText();
 			log.info("user logged in is >>>>>   " + strLoggedInUser);
-			Assert.assertEquals(strLoggedInUser.toLowerCase().contains("anusha"), true);
+			Assert.assertEquals(strLoggedInUser.toLowerCase().contains(""), true);
 
 		} catch (Exception e) {
 			log.error("Exception occurred during sign in ::  " + e.getMessage());
@@ -69,7 +70,7 @@ public class CopyOfDriverTest extends BaseTest {
 		    }*/
 			
 			DriverBuilder.Instance.findElement(By.cssSelector("input[id$='location']")).click();
-			DriverBuilder.Instance.findElement(By.cssSelector("input[id$='location']")).sendKeys("Bengaluru, India");
+			DriverBuilder.Instance.findElement(By.cssSelector("input[id$='location']")).sendKeys("");
 			DriverBuilder.Instance.findElement(By.cssSelector("input[id*='checkIn']")).click();
 			DriverBuilder.Instance.findElement(
 					By.cssSelector("div[id*='201703'] > div > div.weeks > div:nth-child(2) > div:nth-child(5) > div"))
@@ -84,7 +85,7 @@ public class CopyOfDriverTest extends BaseTest {
 			Thread.sleep(2000);
 			String getDisplayLocation = DriverBuilder.Instance.findElement(By.cssSelector("div[id*='display-location']")).getText();
 			log.info("Searched for location :::   " + getDisplayLocation);
-			Assert.assertEquals(getDisplayLocation.toLowerCase().contains("bengaluru"), true);
+			Assert.assertEquals(getDisplayLocation.toLowerCase().contains(""), true);
 			Thread.sleep(3000);
 
 		} catch (Exception e) {

@@ -18,8 +18,6 @@ public class DriverTest extends BaseTest {
 	// http://functionaltestautomation.blogspot.com/2009/10/dataprovider-data-driven-testing-with.html
 
 	private static Logger log = Logger.getLogger(DriverTest.class);
-	//WebElementActions webElemActions = new WebElementActions();
-	Map<String, String> localMap = MapObjectRepository.map;
 
 	@Test(priority = 1)
 	public void doVerifyPageTitle() {
@@ -40,20 +38,20 @@ public class DriverTest extends BaseTest {
 			// DriverBuilder.Instance.switchTo().activeElement().click();
 			// DriverBuilder.Instance.switchTo().frame(1);
 			
-			new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']")).click();
+		//	new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']")).click();
 			//drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']");
-			drActions.sendKeysByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']", "anusha.govindan1@gmail.com");
-			drActions.sendKeysByLocator(WebConstants.CSS_LOCATOR, "input[id$='password']", "Sametime@1");
+			drActions.sendKeysByLocator(WebConstants.CSS_LOCATOR, "input[id$='username']", "");
+			drActions.sendKeysByLocator(WebConstants.CSS_LOCATOR, "input[id$='password']", "");
 			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "button.submit");
 
 			Thread.sleep(5000);			
-			new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator(WebConstants.CSS_LOCATOR, "div[id$='dialog-body']")).sendKeys(Keys.ENTER);
+		//	new Actions(DriverBuilder.Instance).moveToElement(drActions.getElementByLocator(WebConstants.CSS_LOCATOR, "div[id$='dialog-body']")).sendKeys(Keys.ENTER);
 			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "a[id$='dialog-close'] > svg:nth-child(1) > path:nth-child(2)");
 			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, ".profile-icon");
 
 			String strLoggedInUser = drActions.getTextByLocator(WebConstants.CSS_LOCATOR, "div.subtitle:nth-child(1)");
 			log.info("user logged in is >>>>>   " + strLoggedInUser);
-			Assert.assertEquals(strLoggedInUser.toLowerCase().contains("anusha"), true);
+			// Assert.assertEquals(strLoggedInUser.toLowerCase().contains(""), true);
 
 		} catch (Exception e) {
 			log.error("Exception occurred during sign in ::  " + e.getMessage());
@@ -72,7 +70,7 @@ public class DriverTest extends BaseTest {
 		    	bookingCB.click();
 		    }*/
 			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='location']");
-			drActions.sendKeysByLocator(WebConstants.CSS_LOCATOR, "input[id$='location']", "Bengaluru, India");
+			drActions.sendKeysByLocator(WebConstants.CSS_LOCATOR, "input[id$='location']", "");
 			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "input[id$='location']");			
 			
 			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "input[id*='checkIn']");
@@ -85,7 +83,7 @@ public class DriverTest extends BaseTest {
 			Thread.sleep(2000);
 			String getDisplayLocation = drActions.getTextByLocator(WebConstants.CSS_LOCATOR, "div[id*='display-location']");
 			log.info("Searched for location :::   " + getDisplayLocation);
-			Assert.assertEquals(getDisplayLocation.toLowerCase().contains("bengaluru"), true);
+			Assert.assertEquals(getDisplayLocation.toLowerCase().contains(""), true);
 			Thread.sleep(3000);
 
 		} catch (Exception e) {

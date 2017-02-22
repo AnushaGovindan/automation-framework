@@ -10,7 +10,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
-import com.swframework.config.WebConstants;
+import com.automation.config.AutoConstants;
 
 /**
  * Class to load object repository and use it locate webelement
@@ -21,24 +21,24 @@ public class MapObjectRepository {
 	
 	private static Logger log = Logger.getLogger(MapObjectRepository.class);
 	public static Properties prop = new Properties();
-	public static Map<String,String>map = new HashMap<String,String>();
+	//public static Map<String,String>map = new HashMap<String,String>();
 
 	/**
 	 * Method to load obj repository
 	 * @param strPath
 	 */
 	public static void loadPropMap () {
-		log.info("Load Object Repository from "+Constants.OR_PROP_PATH);
+		log.info("Load Object Repository from "+AutoConstants.OR_PROP_PATH);
 		FileInputStream inputStream = null;
 		try {
-			inputStream = new FileInputStream(Constants.OR_PROP_PATH);
+			inputStream = new FileInputStream(AutoConstants.OR_PROP_PATH);
 			prop.load(inputStream);
 			
-			for ( Entry<Object, Object> entry : prop.entrySet()) {
+		/*	for ( Entry<Object, Object> entry : prop.entrySet()) {
 	            map.put((String) entry.getKey(), (String) entry.getValue());
-			}		
+			}	*/	
 		} catch (IOException e) {
-			log.error("Exception occurred while loading property file from "+Constants.OR_PROP_PATH+"  --> "+e.getMessage());
+			log.error("Exception occurred while loading property file from "+AutoConstants.OR_PROP_PATH+"  --> "+e.getMessage());
 		}finally {
 			if (inputStream != null) {		
 				try {

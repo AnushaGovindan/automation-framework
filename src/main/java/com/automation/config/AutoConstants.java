@@ -1,6 +1,6 @@
 package com.automation.config;
 
-public class Constants {
+public class AutoConstants {
 
 	public static final String BROWSER = "Firefox";
 	public static final int IMPLICIT_WAIT_TIME = 20;

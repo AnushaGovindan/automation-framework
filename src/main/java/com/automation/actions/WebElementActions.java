@@ -14,7 +14,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 
-import com.automation.config.Constants;
+import com.automation.config.AutoConstants;
 import com.automation.config.MapObjectRepository;
 
 /**
@@ -61,9 +61,9 @@ public class WebElementActions {
 			DriverBuilder.Instance.navigate().to(data);
 		} catch (Exception e) {
 			log.error("Unable to navigate to " + data + " Exception occurred: " + e.getMessage());
-			return Constants.KEYWORD_FAIL + " -- unable to navigate";
+			return AutoConstants.KEYWORD_FAIL + " -- unable to navigate";
 		}
-		return Constants.KEYWORD_PASS;
+		return AutoConstants.KEYWORD_PASS;
 	}
 
 	/**
@@ -78,9 +78,9 @@ public class WebElementActions {
 			DriverBuilder.Instance.get(data);
 		} catch (Exception e) {
 			log.error("Unable to open " + data + " Exception occurred: " + e.getMessage());
-			return Constants.KEYWORD_FAIL + " -- unable to open the url";
+			return AutoConstants.KEYWORD_FAIL + " -- unable to open the url";
 		}
-		return Constants.KEYWORD_PASS;
+		return AutoConstants.KEYWORD_PASS;
 	}
 	
 	
@@ -91,20 +91,15 @@ public class WebElementActions {
 	 * @return WebElement
 	 * @throws Exception
 	 */
-	public WebElement getElementByLocator(String strLocatorType, String strLocatorVal) throws Exception {
-	//public WebElement getElementByLocator(String strWebElement) throws Exception {
+	//public WebElement getElementByLocator(String strLocatorType, String strLocatorVal) throws Exception {
+	public WebElement getElementByLocator(String strWebElement) throws Exception {
         
-		log.info("Locate the webelement: "+strLocatorVal+" based on locator type: "+strLocatorType);        
-       /* String locator = prop.getProperty(strElement); 
-        // extract the locator type and value from the object
-        String locatorType = locator.split(":")[0];
-        String locatorValue = locator.split(":")[1];
-         
-        log.debug("Retrieving object of type '" + locatorType + "' and value '" + locatorValue);*/
+		//log.info("Locate the webelement: "+strLocatorVal+" based on locator type: "+strLocatorType);
+		log.info("Locate the webelement: "+strWebElement);
 		
-	//	DriverBuilder.Instance.findElement(MapObjectRepository.getByLocator(strElement));
+		return DriverBuilder.Instance.findElement(MapObjectRepository.getByLocator(strWebElement));
          
-        if(strLocatorType.toLowerCase().equals("id"))
+     /*   if(strLocatorType.toLowerCase().equals("id"))
             return DriverBuilder.Instance.findElement(By.id(strLocatorVal)); //By.id(locatorValue);
         else if(strLocatorType.toLowerCase().equals("name"))
             return DriverBuilder.Instance.findElement(By.name(strLocatorVal));
@@ -121,7 +116,7 @@ public class WebElementActions {
         else if(strLocatorType.toLowerCase().equals("xpath"))
             return DriverBuilder.Instance.findElement(By.xpath(strLocatorVal));
         else
-            throw new Exception("Illegal locator '" + strLocatorType + "'");
+            throw new Exception("Illegal locator '" + strLocatorType + "'");*/
     }
 	
 	/**
@@ -212,7 +207,7 @@ public class WebElementActions {
 				strText = DriverBuilder.Instance.findElement(By.xpath(strLocatorVal)).getText();
 		} catch (Exception e) {
 			log.error("Exception occurred:  "+e.getMessage());
-			return Constants.KEYWORD_FAIL + " -- Unable to retreive text of the WebElement using the locator ";
+			return AutoConstants.KEYWORD_FAIL + " -- Unable to retreive text of the WebElement using the locator ";
 		}
 		return strText;
     }
@@ -300,9 +295,9 @@ public class WebElementActions {
 			FileUtils.copyFile(scrFile, new File(System.getProperty("user.dir") +"//screenshots//"+filename+".jpg"));
 		}catch(Exception e){
 			log.error("Exception occurred while capturing screenshot: " + e.getMessage());
-			return Constants.KEYWORD_FAIL + " -- unable to capture screenshot";
+			return AutoConstants.KEYWORD_FAIL + " -- unable to capture screenshot";
 		}
-		return Constants.KEYWORD_PASS;
+		return AutoConstants.KEYWORD_PASS;
 			
 	}
 	

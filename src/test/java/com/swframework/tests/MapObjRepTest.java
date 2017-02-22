@@ -12,12 +12,12 @@ public class MapObjRepTest {
   public void f() {
 	  
 	  MapObjectRepository.loadPropMap();
-	  Map<String, String> localMap = MapObjectRepository.map;
+//	  Map<String, String> localMap = MapObjectRepository.map;
 	  
-	  for (Entry<String, String> entry : localMap.entrySet()) {
+	 /* for (Entry<String, String> entry : localMap.entrySet()) {
 		    System.out.println("Key = " + entry.getKey() + " , Value = " + entry.getValue());
 		}
 	  
-	 System.out.println(localMap.get("loginpage.username.textbox"));
+	 System.out.println(localMap.get("loginpage.username.textbox"));*/
   }
 }
