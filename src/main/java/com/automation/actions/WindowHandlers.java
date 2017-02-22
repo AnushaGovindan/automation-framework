@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchWindowException;
 
-import com.automation.config.AutoConstants;
+import com.automation.config.WebConstants;
 
 public class WindowHandlers {
 
@@ -36,9 +36,9 @@ public class WindowHandlers {
 				}
 			}
 		} catch (Exception e) {
-			return AutoConstants.KEYWORD_FAIL + " Unable to Switch Window " + e.getMessage();
+			return WebConstants.KEYWORD_FAIL + " Unable to Switch Window " + e.getMessage();
 		}
-		return AutoConstants.KEYWORD_PASS;
+		return WebConstants.KEYWORD_PASS;
 	}
 
 	// To move back to parent window
@@ -51,9 +51,9 @@ public class WindowHandlers {
 			DriverBuilder.Instance.switchTo().window(winHandleBefore);
 			// continue with original browser (first window)
 		} catch (Exception e) {
-			return AutoConstants.KEYWORD_FAIL + " Unable to Switch to main window " + e.getMessage();
+			return WebConstants.KEYWORD_FAIL + " Unable to Switch to main window " + e.getMessage();
 		}
-		return AutoConstants.KEYWORD_PASS;
+		return WebConstants.KEYWORD_PASS;
 	}
 	
 	public boolean isAlertPresent() throws NoAlertPresentException{

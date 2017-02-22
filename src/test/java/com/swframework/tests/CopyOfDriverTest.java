@@ -7,7 +7,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import com.automation.actions.DriverBuilder;
-import com.swframework.config.WebConstants;
 
 
 public class CopyOfDriverTest extends BaseTest {
@@ -30,7 +29,7 @@ public class CopyOfDriverTest extends BaseTest {
 	public void clickSignUp() {
 		log.info("*****  Click on SignUp *****");
 		try {
-			drActions.clickElementByLocator(WebConstants.CSS_LOCATOR, "span.private-deals-label:nth-child(3) > b:nth-child(1)");
+//this step is reqd->>			//drActions.clickElementByLocator(WebConstants1.CSS_LOCATOR, "span.private-deals-label:nth-child(3) > b:nth-child(1)");
 
 			Thread.sleep(5000);
 			// DriverBuilder.Instance.switchTo().activeElement().click();

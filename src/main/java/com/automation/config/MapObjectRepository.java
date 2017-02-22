@@ -10,7 +10,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 
-import com.automation.config.AutoConstants;
+import com.automation.config.WebConstants;
 
 /**
  * Class to load object repository and use it locate webelement
@@ -28,17 +28,17 @@ public class MapObjectRepository {
 	 * @param strPath
 	 */
 	public static void loadPropMap () {
-		log.info("Load Object Repository from "+AutoConstants.OR_PROP_PATH);
+		log.info("Load Object Repository from "+WebConstants.OR_PROP_PATH);
 		FileInputStream inputStream = null;
 		try {
-			inputStream = new FileInputStream(AutoConstants.OR_PROP_PATH);
+			inputStream = new FileInputStream(WebConstants.OR_PROP_PATH);
 			prop.load(inputStream);
 			
 		/*	for ( Entry<Object, Object> entry : prop.entrySet()) {
 	            map.put((String) entry.getKey(), (String) entry.getValue());
 			}	*/	
 		} catch (IOException e) {
-			log.error("Exception occurred while loading property file from "+AutoConstants.OR_PROP_PATH+"  --> "+e.getMessage());
+			log.error("Exception occurred while loading property file from "+WebConstants.OR_PROP_PATH+"  --> "+e.getMessage());
 		}finally {
 			if (inputStream != null) {		
 				try {
@@ -62,27 +62,29 @@ public class MapObjectRepository {
         
 		log.info("Locate the webelement based on locator type");        
         String locator = prop.getProperty(strElement); 
-        // extract the locator type and value from the object
-        String locatorType = locator.split(":")[0];
-        String locatorValue = locator.split(":")[1];
+        log.info("Prop value ->>   "+locator);
+        // extract the locator type and value from the object  
+        String[] propValueArr = locator.split("\\|");
+        String locatorType = propValueArr[0];
+        String locatorValue = propValueArr[1];
          
         log.debug("Retrieving object of type '" + locatorType + "' and value '" + locatorValue);
          
-        if(locatorType.toLowerCase().equals("id"))
+        if(locatorType.toLowerCase().equals(WebConstants.ID_LOCATOR))
             return By.id(locatorValue);
-        else if(locatorType.toLowerCase().equals("name"))
+        else if(locatorType.toLowerCase().equals(WebConstants.NAME_LOCATOR))
             return By.name(locatorValue);
-        else if((locatorType.toLowerCase().equals("classname")) || (locatorType.toLowerCase().equals("class")))
+        else if((locatorType.toLowerCase().equals(WebConstants.CLASS_NAME_LOCATOR)) || (locatorType.toLowerCase().equals(WebConstants.SHORT_CLASS_NAME_LOCATOR)))
             return By.className(locatorValue);
-        else if((locatorType.toLowerCase().equals("tagname")) || (locatorType.toLowerCase().equals("tag")))
+        else if((locatorType.toLowerCase().equals(WebConstants.TAGNAME_LOCATOR)) || (locatorType.toLowerCase().equals(WebConstants.SHORT_TAGNAME_LOCATOR)))
             return By.tagName(locatorValue);
-        else if((locatorType.toLowerCase().equals("linktext")) || (locatorType.toLowerCase().equals("link")))
+        else if((locatorType.toLowerCase().equals(WebConstants.LINK_TEXT_LOCATOR)) || (locatorType.toLowerCase().equals(WebConstants.SHORT_LINK_TEXT_LOCATOR)))
             return By.linkText(locatorValue);
-        else if(locatorType.toLowerCase().equals("partiallinktext"))
+        else if(locatorType.toLowerCase().equals(WebConstants.PARTIAL_LINK_TEXT_LOCATOR))
             return By.partialLinkText(locatorValue);
-        else if((locatorType.toLowerCase().equals("cssselector")) || (locatorType.toLowerCase().equals("css")))
+        else if((locatorType.toLowerCase().equals(WebConstants.CSS_LOCATOR)) || (locatorType.toLowerCase().equals(WebConstants.SHORT_CSS_LOCATOR)))
             return By.cssSelector(locatorValue);
-        else if(locatorType.toLowerCase().equals("xpath"))
+        else if(locatorType.toLowerCase().equals(WebConstants.XPATH_LOCATOR))
             return By.xpath(locatorValue);
         else
             throw new Exception("Illegal locator '" + locatorType + "'");

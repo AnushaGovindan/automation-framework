@@ -19,5 +19,12 @@ public class MapObjRepTest {
 		}
 	  
 	 System.out.println(localMap.get("loginpage.username.textbox"));*/
+	  
+	  try {
+		MapObjectRepository.getByLocator("homepage.signin.link");
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
 }

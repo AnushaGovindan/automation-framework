@@ -27,7 +27,7 @@ public class BaseTest {
 	@AfterSuite
 	public void afterSuite() {
 		log.info("executing aftersuite code");
-		DriverBuilder.quitDriver();
+		//DriverBuilder.quitDriver();
 	}
 
 }

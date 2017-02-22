@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.automation.config.AutoConstants;
+import com.automation.config.WebConstants;
 
 /**
  * Class to initialize required browser driver and to close browser window(s)
@@ -39,8 +39,8 @@ public class DriverBuilder {
 					Instance = new ChromeDriver();
 				}
 			}
-			log.info("Driver wait time has been set to " + AutoConstants.IMPLICIT_WAIT_TIME + " secs.");
-			Instance.manage().timeouts().implicitlyWait(AutoConstants.IMPLICIT_WAIT_TIME, TimeUnit.SECONDS);
+			log.info("Driver wait time has been set to " + WebConstants.IMPLICIT_WAIT_TIME + " secs.");
+			Instance.manage().timeouts().implicitlyWait(WebConstants.IMPLICIT_WAIT_TIME, TimeUnit.SECONDS);
 			Instance.manage().window().maximize();
 			
 		} catch (Exception e) {
