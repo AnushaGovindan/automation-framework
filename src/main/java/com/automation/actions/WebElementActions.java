@@ -44,7 +44,7 @@ public class WebElementActions {
 		} catch (InterruptedException e) {
 			log.error("Unable to highlight :  "+e.getMessage());
 		}
-		//js.executeScript("arguments[0].setAttribute('style','border: solid 2px white');", element);
+		//    js.executeScript("arguments[0].setAttribute('style','border: solid 2px white');", element);
 		js.executeScript("arguments[0].setAttribute('style', arguments[1]);", element, "background: white; border: 2px solid white;");
 		log.info("setting element back to white border");
 	}
