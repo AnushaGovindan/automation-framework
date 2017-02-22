@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="RegressionTestSuite">
+ 
+  <test name="LoginTests">
+    <classes>
+      <class name="com.swframework.tests.LoginPageTest">
+      	<methods>
+      		<include name="doCheckPageTitle"/>
+      		<exclude name="signInAsUser"/>
+      	</methods>
+      </class>
+      	
+  <!--     <class name="com.swframework.tests.SearchPageAndResultTest"/>
+      <class name="com.swframework.tests.ProfileSignOutTest"/> -->
+    </classes>
+  </test> 
+  
+</suite> 
